@@ -10,7 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
+@Getter @Setter @NoArgsConstructor
 public class Alumno {
 
 	@Id
@@ -23,23 +28,24 @@ public class Alumno {
 
 	private String dni;
 
-	@OneToMany(mappedBy = "tag", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "alumno", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Matricula> matriculas = new ArrayList<>();
 
-	public void matricularAlumno (Modulo modulo, Alumno alumno, Integer calificacion ) {
-		
-		
-		
-		Matricula m = new Matricula (alumno, modulo,calificacion);
-		this.getMatriculas().add(m);
-		
-		
-		
-		
-	}
+	public void matricularAlumno(Modulo modulo,  Integer calificacion) {
 
-	public Alumno() {
+		Matricula matricula = new Matricula(this, modulo, calificacion);
+		modulo.anadirMatricula(matricula);
+		this.matriculas.add(matricula);
 	}
+	
+	
+	public void desmatricularAlumno(Matricula matricula) {
+
+		matricula.getModulo().eliminarMatricula(matricula);
+		this.getMatriculas().remove(matricula);
+	}
+	
+	
 
 	public Alumno(Long alumno_id, String nombre, String apellidos, String dni, List<Matricula> matriculas) {
 		super();
@@ -50,44 +56,5 @@ public class Alumno {
 		this.matriculas = matriculas;
 	}
 
-	public Long getAlumno_id() {
-		return alumno_id;
-	}
-
-	public void setAlumno_id(Long alumno_id) {
-		this.alumno_id = alumno_id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getApellidos() {
-		return apellidos;
-	}
-
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
-	}
-
-	public String getDni() {
-		return dni;
-	}
-
-	public void setDni(String dni) {
-		this.dni = dni;
-	}
-
-	public List<Matricula> getMatriculas() {
-		return matriculas;
-	}
-
-	public void setMatriculas(List<Matricula> matriculas) {
-		this.matriculas = matriculas;
-	}
 
 }

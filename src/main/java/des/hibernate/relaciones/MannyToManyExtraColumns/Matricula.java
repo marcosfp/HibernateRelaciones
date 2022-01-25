@@ -3,14 +3,21 @@ package des.hibernate.relaciones.MannyToManyExtraColumns;
 import java.util.Date;
 import java.util.Objects;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
+@Getter @Setter @NoArgsConstructor
 public class Matricula {
 
+    @EmbeddedId
 	private MatriculaId id_matricula;
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -25,10 +32,6 @@ public class Matricula {
 	
 	private Integer calificacion;
 	
-
-	public Matricula() {
-	}
-
 	public Matricula(Alumno alumno, Modulo modulo, Integer calificacion) {
 		super();
 		this.alumno = alumno;
@@ -41,47 +44,6 @@ public class Matricula {
 		this.alumno = alumno;
 		this.modulo = modulo;
 		this.calificacion = 0;
-	}
-
-	
-	public Integer getCalificacion() {
-		return calificacion;
-	}
-
-	public void setCalificacion(Integer calificacion) {
-		this.calificacion = calificacion;
-	}
-
-	public MatriculaId getId_matricula() {
-		return id_matricula;
-	}
-
-	public void setId_matricula(MatriculaId id_matricula) {
-		this.id_matricula = id_matricula;
-	}
-
-	public Alumno getAlumno() {
-		return alumno;
-	}
-
-	public void setAlumno(Alumno alumno) {
-		this.alumno = alumno;
-	}
-
-	public Modulo getModulo() {
-		return modulo;
-	}
-
-	public void setModulo(Modulo modulo) {
-		this.modulo = modulo;
-	}
-
-	public Date getFecha_creacion() {
-		return fecha_creacion;
-	}
-
-	public void setFecha_creacion(Date fecha_creacion) {
-		this.fecha_creacion = fecha_creacion;
 	}
 
 	

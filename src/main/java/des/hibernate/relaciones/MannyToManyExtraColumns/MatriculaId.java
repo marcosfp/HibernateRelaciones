@@ -15,7 +15,7 @@ public class MatriculaId implements Serializable {
 	@Column(name = "alumno_id")
 	private Long alumno_id;
 
-	@Column(name = "tag_id")
+	@Column(name = "modulo_id")
 	private Long modulo_id;
 
 	public MatriculaId() {

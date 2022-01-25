@@ -1,0 +1,25 @@
+#wrapper{ 
+padding-top:50px;
+margin-left: auto;
+margin-right: auto;
+
+}
+
+#contenedor{
+position : relative;
+width : 1000px; 
+margin-left: -500px;
+left : 50%;
+}
+
+.contenido{
+float:left;	
+position : relative;
+height : 200px; 
+width : 33%;
+border: 1px;
+}
+
+h1{
+	text-align: center;
+}
