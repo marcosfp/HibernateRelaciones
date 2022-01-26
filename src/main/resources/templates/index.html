@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Prueba AJAX</title>
+    <title>Many to many with extra column</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/estilo.css}">
 
@@ -15,18 +15,44 @@
 <div class="contenido">
 <h1>Modulos </h1>
 <div class="selector">
-
+      <select multiple="" class="form-select" id="exampleSelect2" >
+        <option th:each="modulo : ${listaModulos}" th:text="${modulo.nombre}" th:value="${modulo.modulo_id}"></option>
+        
+      </select>
+      
+      <div >
+      <form th:action="@{/manytomanyextra/crearModulo}" th:method="post">
+      	<input type="text" name="nombreModulo"></input>
+      	
+      	<input type="submit" value=" Crear Modulo">
+      </form>
+      </div>
+      
 </div >
 
 
 </div>
 <div class="contenido">
-<h1>Matriculas </h1>
+<h1>Alumnos </h1>
+      <select multiple="" class="form-select" id="exampleSelect3" >
+        <option th:each="alumno : ${listaAlumnos}" th:text="${alumno.nombreyapellidos}" th:value="${alumno.alumno_id}"></option>
+        
+      </select>
+      
+      <div >
+      <form th:action="@{/manytomanyextra/crearAlumno}" th:method="post">
+      	<input type="text" name="nombreyapellidosAlumno"></input>
+      	
+      	<input type="submit" value=" Crear Alumno">
+      </form>
+      </div>
+
+
 <div class="selector">
 
 </div ></div>
 <div class="contenido">
-<h1>Alumnos </h1>
+<h1>Matriculas </h1>
 <div class="selector">
 
 </div >

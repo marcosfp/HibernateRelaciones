@@ -16,7 +16,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 public class Modulo {
 
@@ -34,6 +35,11 @@ public class Modulo {
 		this.modulo_id = modulo_id;
 		this.nombre = nombre;
 		this.matriculas = modulo;
+	}
+
+	public Modulo(String nombre) {
+		super();
+		this.nombre = nombre;
 	}
 
 	@Override
