@@ -44,4 +44,14 @@ public class ControladorManyToManyExtraColumn {
 		servicio.crearAlumno(alumno);
 		return "redirect:/manytomanyextra/index";
 	}
+	
+	@RequestMapping(method = RequestMethod.POST, value ={"/matricularAlumno"})
+	public String matricularAlumno(@RequestParam(name="modulo") Long moduloId, @RequestParam(name="alumno") Long alumnoId) {
+
+		servicio.matricularAlumno(alumnoId, moduloId, 0);
+		
+		return "redirect:/manytomanyextra/index";
+	}
+	
+	
 }

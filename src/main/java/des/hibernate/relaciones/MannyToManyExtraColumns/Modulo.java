@@ -1,5 +1,6 @@
 package des.hibernate.relaciones.MannyToManyExtraColumns;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -19,7 +20,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Modulo {
+public class Modulo implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,8 +54,8 @@ public class Modulo {
 			return true;
 		if (o == null || getClass() != o.getClass())
 			return false;
-		Modulo tag = (Modulo) o;
-		return Objects.equals(nombre, tag.nombre);
+		Modulo m = (Modulo) o;
+		return Objects.equals(nombre, m.nombre);
 	}
 
 	@Override

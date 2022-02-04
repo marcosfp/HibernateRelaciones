@@ -1,7 +1,9 @@
 package des.hibernate.relaciones.MannyToManyExtraColumns;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -18,7 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Alumno {
+public class Alumno implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,11 +31,12 @@ public class Alumno {
 	@OneToMany(mappedBy = "alumno", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Matricula> matriculas = new ArrayList<>();
 
-	public void matricularAlumno(Modulo modulo, Integer calificacion) {
+	public Matricula matricularAlumno(Modulo modulo, Integer calificacion) {
 
 		Matricula matricula = new Matricula(this, modulo, calificacion);
-		modulo.anadirMatricula(matricula);
-		this.matriculas.add(matricula);
+		modulo.getMatriculas().add(matricula);
+		matriculas.add(matricula);
+		return matricula;
 	}
 
 	public void desmatricularAlumno(Matricula matricula) {
@@ -43,7 +46,6 @@ public class Alumno {
 	}
 
 	public Alumno(Long alumno_id, String nombreyapellidos, List<Matricula> matriculas) {
-		super();
 		this.alumno_id = alumno_id;
 		this.nombreyapellidos = nombreyapellidos;
 		this.matriculas = matriculas;
@@ -51,6 +53,22 @@ public class Alumno {
 
 	public Alumno(String nombreyapellidos) {
 		this.nombreyapellidos = nombreyapellidos;
+	}
+	
+	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Alumno m = (Alumno) o;
+		return Objects.equals(nombreyapellidos, m.nombreyapellidos);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(nombreyapellidos);
 	}
 
 }

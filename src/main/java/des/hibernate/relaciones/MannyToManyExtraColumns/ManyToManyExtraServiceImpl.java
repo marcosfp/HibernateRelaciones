@@ -46,10 +46,25 @@ public class ManyToManyExtraServiceImpl implements ManyToManyExtraService {
 	}
 
 	@Override
-	public Matricula matricularAlumno(Alumno a, Modulo m, Integer callificacion) {
+	public Matricula matricularAlumno(Long alumnoId, Long moduloId, Integer callificacion) {
 
-		a.matricularAlumno(m, callificacion);
-		alumnoRepository.save(a);
+		
+		System.out.println("//////////////////RECUPERAMOS EL ALUMNO //////////////////");
+		
+		Alumno alumno = alumnoRepository.findById(alumnoId).orElse(null);
+		
+		System.out.println("//////////////////RECUPERAMOS EL MODULO //////////////////");
+
+		
+		Modulo modulo= moduloRepository.findById(moduloId).orElse(null);
+		
+		if(alumno == null || modulo == null) return null;
+		
+		System.out.println("//////////////////MATRICULA //////////////////");
+
+		
+		alumno.matricularAlumno(modulo, callificacion);
+		alumnoRepository.save(alumno);
 		return null;
 	}
 

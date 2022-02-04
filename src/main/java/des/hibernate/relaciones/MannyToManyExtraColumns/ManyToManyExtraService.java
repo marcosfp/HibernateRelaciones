@@ -13,7 +13,7 @@ public interface ManyToManyExtraService {
 	
 	Modulo crearModulo(Modulo m);
 	
-	Matricula matricularAlumno(Alumno a, Modulo m, Integer callificacion);
+	Matricula matricularAlumno(Long alumnoId, Long moduloId, Integer callificacion);
 	
 	void desmatricularAlumno(Matricula m);
 	

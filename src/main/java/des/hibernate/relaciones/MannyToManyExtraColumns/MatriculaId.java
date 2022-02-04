@@ -6,8 +6,15 @@ import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 
 @Embeddable
+@Getter
+@Setter
+@NoArgsConstructor
 public class MatriculaId implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -18,34 +25,11 @@ public class MatriculaId implements Serializable {
 	@Column(name = "modulo_id")
 	private Long modulo_id;
 
-	public MatriculaId() {
-	}
 
 	public MatriculaId(Long alumno_id, Long modulo_id) {
 		super();
 		this.alumno_id = alumno_id;
 		this.modulo_id = modulo_id;
-	}
-
-	public Long getAlumno_id() {
-		return alumno_id;
-	}
-
-	public void setAlumno_id(Long alumno_id) {
-		this.alumno_id = alumno_id;
-	}
-
-	public Long getModulo_id() {
-		return modulo_id;
-	}
-
-	public void setModulo_id(Long modulo_id) {
-		this.modulo_id = modulo_id;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(alumno_id, modulo_id);
 	}
 
 	@Override
@@ -59,5 +43,8 @@ public class MatriculaId implements Serializable {
         return Objects.equals(alumno_id, that.alumno_id) &&
                Objects.equals(modulo_id, that.modulo_id);
 	}
-
+	@Override
+	public int hashCode() {
+		return Objects.hash(alumno_id, modulo_id);
+	}
 }

@@ -1,5 +1,6 @@
 package des.hibernate.relaciones.MannyToManyExtraColumns;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
@@ -15,9 +16,11 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter @NoArgsConstructor
-public class Matricula {
+public class Matricula implements Serializable {
 
-    @EmbeddedId
+	private static final long serialVersionUID = 1L;
+
+	@EmbeddedId
 	private MatriculaId id_matricula;
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -33,17 +36,10 @@ public class Matricula {
 	private Integer calificacion;
 	
 	public Matricula(Alumno alumno, Modulo modulo, Integer calificacion) {
-		super();
+		this.id_matricula= new MatriculaId(alumno.getAlumno_id(),modulo.getModulo_id());
 		this.alumno = alumno;
 		this.modulo = modulo;
 		this.calificacion = calificacion;
-	}
-
-	public Matricula( Alumno alumno, Modulo modulo) {
-		super();
-		this.alumno = alumno;
-		this.modulo = modulo;
-		this.calificacion = 0;
 	}
 
 	

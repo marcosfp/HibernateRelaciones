@@ -1,63 +1,65 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="UTF-8">
-    <title>Many to many with extra column</title>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+<meta charset="UTF-8">
+<title>Many to many with extra column</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/estilo.css}">
 
-    <script th:src="@{/js/jquery-3.5.0.js}"></script>
-    <script th:src="@{/js/bootstrap/bootstrap.js}"></script>
+<script th:src="@{/js/jquery-3.5.0.js}"></script>
+<script th:src="@{/js/bootstrap/bootstrap.js}"></script>
 </head>
 <body>
-<div id="wrapper">
-<div class="contenido">
-<h1>Modulos </h1>
-<div class="selector">
-      <select multiple="" class="form-select" id="exampleSelect2" >
-        <option th:each="modulo : ${listaModulos}" th:text="${modulo.nombre}" th:value="${modulo.modulo_id}"></option>
-        
-      </select>
-      
-      <div >
-      <form th:action="@{/manytomanyextra/crearModulo}" th:method="post">
-      	<input type="text" name="nombreModulo"></input>
-      	
-      	<input type="submit" value=" Crear Modulo">
-      </form>
-      </div>
-      
-</div >
+	<div id="wrapper">
+		<div class="contenido">
+			<h1>Modulos</h1>
+			<div class="selector">
 
 
-</div>
-<div class="contenido">
-<h1>Alumnos </h1>
-      <select multiple="" class="form-select" id="exampleSelect3" >
-        <option th:each="alumno : ${listaAlumnos}" th:text="${alumno.nombreyapellidos}" th:value="${alumno.alumno_id}"></option>
-        
-      </select>
-      
-      <div >
-      <form th:action="@{/manytomanyextra/crearAlumno}" th:method="post">
-      	<input type="text" name="nombreyapellidosAlumno"></input>
-      	
-      	<input type="submit" value=" Crear Alumno">
-      </form>
-      </div>
+				<form th:action="@{/manytomanyextra/matricularAlumno}" th:method="post">
+					<select multiple="" class="form-select" id="exampleSelect2" name="modulo">
+						<option th:each="modulo : ${listaModulos}"
+							th:text="${modulo.nombre}" th:value="${modulo.modulo_id}"></option>
+
+					</select>
 
 
-<div class="selector">
 
-</div ></div>
-<div class="contenido">
-<h1>Matriculas </h1>
-<div class="selector">
+					<h1>Alumnos</h1>
+					<select multiple="" class="form-select" id="exampleSelect3" name="alumno">
+						<option th:each="alumno : ${listaAlumnos}"
+							th:text="${alumno.nombreyapellidos}"
+							th:value="${alumno.alumno_id}"></option>
 
-</div >
-</div>
-</div>
+					</select> <input type="submit" value=" Matricular Alumno">
+
+				</form>
+
+
+				<form th:action="@{/manytomanyextra/crearAlumno}" th:method="post">
+					<input type="text" name="nombreyapellidosAlumno"></input> <input
+						type="submit" value=" Crear Alumno">
+				</form>
+			</div>
+			<form th:action="@{/manytomanyextra/crearModulo}" th:method="post">
+				<input type="text" name="nombreModulo"></input> <input type="submit"
+					value=" Crear Modulo">
+			</form>
+		</div>
+
+	</div>
+	<div class="contenido">
+		<h1>Matriculas</h1>
+		<select multiple="" class="form-select" id="exampleSelect3">
+			<option th:each="matricula : ${listaMatriculas}"
+				th:text="${matricula.alumno.nombreyapellidos +   + matricula.modulo..nombre }"
+				th:value="${alumno.alumno_id}"></option>
+
+		</select>
+
+	</div>
+	</div>
 </body>
 
 
