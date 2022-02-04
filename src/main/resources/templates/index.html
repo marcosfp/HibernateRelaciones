@@ -53,8 +53,8 @@
 		<h1>Matriculas</h1>
 		<select multiple="" class="form-select" id="exampleSelect3">
 			<option th:each="matricula : ${listaMatriculas}"
-				th:text="${matricula.alumno.nombreyapellidos +   + matricula.modulo..nombre }"
-				th:value="${alumno.alumno_id}"></option>
+				th:text="${matricula.alumno.nombreyapellidos +'   '+ matricula.modulo.nombre }"
+				th:value="${matricula.id_matricula.alumno_id+'   '+matricula.id_matricula.modulo_id}"></option>
 
 		</select>
 
